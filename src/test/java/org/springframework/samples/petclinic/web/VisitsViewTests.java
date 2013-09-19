@@ -48,23 +48,23 @@ import org.springframework.web.context.WebApplicationContext;
 @ActiveProfiles("jdbc")
 public class VisitsViewTests {
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
 
-    private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-    @Before
-    public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-    }
-    
-    @Test
-    public void getVisitsXml() throws Exception {
-        ResultActions actions = this.mockMvc.perform(get("/vets.xml").accept(MediaType.APPLICATION_XML));
-        actions.andDo(print()); // action is logged into the console
-        actions.andExpect(status().isOk());
-        actions.andExpect(content().contentType("application/xml"));
-        actions.andExpect(xpath("/vets/vetList[id=1]/firstName").string(containsString("James")));
+	@Before
+	public void setup() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+	}
 
-    }
+	@Test
+	public void getVisitsXml() throws Exception {
+		ResultActions actions = this.mockMvc.perform(get("/vets.xml").accept(MediaType.APPLICATION_XML));
+		actions.andDo(print()); // action is logged into the console
+		actions.andExpect(status().isOk());
+		actions.andExpect(content().contentType("application/xml"));
+		actions.andExpect(xpath("/vets/vetList[id=1]/firstName").string(containsString("James")));
+
+	}
 }
