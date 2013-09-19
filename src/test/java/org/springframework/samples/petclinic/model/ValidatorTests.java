@@ -19,25 +19,25 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 public class ValidatorTests {
 
 	private Validator createValidator() {
-	      LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
-	      localValidatorFactoryBean.afterPropertiesSet();
-	      return localValidatorFactoryBean;
-	  }
+		LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
+		localValidatorFactoryBean.afterPropertiesSet();
+		return localValidatorFactoryBean;
+	}
 
 	@Test
-    public void emptyFirstName() {
+	public void emptyFirstName() {
 
-        Person person = new Person();
-        person.setFirstName("");
-        person.setLastName("smith");
+		Person person = new Person();
+		person.setFirstName("");
+		person.setLastName("smith");
 
-        Validator validator = createValidator();
-        Set<ConstraintViolation<Person>> constraintViolations = validator.validate(person);
+		Validator validator = createValidator();
+		Set<ConstraintViolation<Person>> constraintViolations = validator.validate(person);
 
-        Assert.assertEquals(1, constraintViolations.size());
-        ConstraintViolation<Person> violation =  constraintViolations.iterator().next();
-        Assert.assertEquals(violation.getPropertyPath().toString(), "firstName");
-        Assert.assertEquals(violation.getMessage(), "may not be empty");
-    }
+		Assert.assertEquals(1, constraintViolations.size());
+		ConstraintViolation<Person> violation =  constraintViolations.iterator().next();
+		Assert.assertEquals(violation.getPropertyPath().toString(), "firstName");
+		Assert.assertEquals(violation.getMessage(), "may not be empty");
+	}
 
 }
