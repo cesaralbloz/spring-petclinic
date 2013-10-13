@@ -42,14 +42,14 @@ public abstract class EntityUtils {
      * @throws ObjectRetrievalFailureException
      *          if the entity was not found
      */
-    public static <T extends BaseEntity> T getById(Collection<T> entities, Class<T> entityClass, int entityId)
-            throws ObjectRetrievalFailureException {
-        for (T entity : entities) {
+    public static <T extends BaseEntity> T getById(Collection<T> entities, Class<T> entityClass, int entityId) throws ObjectRetrievalFailureException {
+
+    	for (T entity : entities) {
             if (entity.getId().intValue() == entityId && entityClass.isInstance(entity)) {
                 return entity;
             }
         }
+
         throw new ObjectRetrievalFailureException(entityClass, entityId);
     }
-
 }

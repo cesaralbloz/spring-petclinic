@@ -39,27 +39,26 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class JpaVisitRepositoryImpl implements VisitRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 
+	@Override
+	public void save(Visit visit) {
 
-    @Override
-    public void save(Visit visit) {
-    	if (visit.getId() == null) {
-    		this.em.persist(visit);     		
-    	}
-    	else {
-    		this.em.merge(visit);    
-    	}
-    }
+		if (visit.getId() == null) {
+			this.em.persist(visit);
+		} else {
+			this.em.merge(visit);
+		}
+	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Visit> findByPetId(Integer petId) {
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Visit> findByPetId(Integer petId) {
-        Query query = this.em.createQuery("SELECT visit FROM Visit v where v.pets.id= :id");
-        query.setParameter("id", petId);
-        return query.getResultList();
-    }
+		Query query = this.em.createQuery("SELECT visit FROM Visit v where v.pets.id= :id");
+		query.setParameter("id", petId);
 
+		return query.getResultList();
+	}
 }

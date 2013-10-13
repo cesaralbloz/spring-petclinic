@@ -27,15 +27,16 @@ import org.springframework.validation.Errors;
  */
 public class PetValidator {
 
-    public void validate(Pet pet, Errors errors) {
-        String name = pet.getName();
-        if (!StringUtils.hasLength(name)) {
-            errors.rejectValue("name", "required", "required");
-        } else if (pet.isNew() && pet.getOwner().getPet(name, true) != null) {
-            errors.rejectValue("name", "duplicate", "already exists");
-        } else if (pet.isNew() && pet.getType() == null) {
-            errors.rejectValue("type", "required", "required");
-        }
-    }
+	public void validate(Pet pet, Errors errors) {
 
+		String name = pet.getName();
+
+		if (!StringUtils.hasLength(name)) {
+			errors.rejectValue("name", "required", "required");
+		} else if (pet.isNew() && pet.getOwner().getPet(name, true) != null) {
+			errors.rejectValue("name", "duplicate", "already exists");
+		} else if (pet.isNew() && pet.getType() == null) {
+			errors.rejectValue("type", "required", "required");
+		}
+	}
 }
