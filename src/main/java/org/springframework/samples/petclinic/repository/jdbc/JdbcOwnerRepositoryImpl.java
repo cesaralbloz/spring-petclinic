@@ -89,7 +89,7 @@ public class JdbcOwnerRepositoryImpl implements OwnerRepository {
 	 * for the corresponding owner, if not already loaded.
 	 */
 	@Override
-	public Owner findById(Integer id) throws DataAccessException {
+	public Owner findById(int id) throws DataAccessException {
 
 		Owner owner;
 
