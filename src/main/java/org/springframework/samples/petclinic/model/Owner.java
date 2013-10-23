@@ -44,6 +44,7 @@ import org.springframework.core.style.ToStringCreator;
 @Entity
 @Table(name = "owners")
 public class Owner extends Person {
+
 	@Column(name = "address")
 	@NotEmpty
 	private String address;
@@ -90,15 +91,19 @@ public class Owner extends Person {
 	}
 
 	protected Set<Pet> getPetsInternal() {
+
 		if (this.pets == null) {
 			this.pets = new HashSet<Pet>();
 		}
+
 		return this.pets;
 	}
 
 	public List<Pet> getPets() {
+
 		List<Pet> sortedPets = new ArrayList<Pet>(getPetsInternal());
 		PropertyComparator.sort(sortedPets, new MutableSortDefinition("name", true, true));
+
 		return Collections.unmodifiableList(sortedPets);
 	}
 
@@ -124,7 +129,9 @@ public class Owner extends Person {
 	 * @return true if pet name is already in use
 	 */
 	public Pet getPet(String name, boolean ignoreNew) {
+
 		name = name.toLowerCase();
+		
 		for (Pet pet : getPetsInternal()) {
 			if (!ignoreNew || !pet.isNew()) {
 				String compName = pet.getName();
@@ -134,20 +141,20 @@ public class Owner extends Person {
 				}
 			}
 		}
+
 		return null;
 	}
 
 	@Override
 	public String toString() {
 		return new ToStringCreator(this)
-
-		.append("id", this.getId())
-		.append("new", this.isNew())
-		.append("lastName", this.getLastName())
-		.append("firstName", this.getFirstName())
-		.append("address", this.address)
-		.append("city", this.city)
-		.append("telephone", this.telephone)
-		.toString();
+			.append("id", this.getId())
+			.append("new", this.isNew())
+			.append("lastName", this.getLastName())
+			.append("firstName", this.getFirstName())
+			.append("address", this.address)
+			.append("city", this.city)
+			.append("telephone", this.telephone)
+			.toString();
 	}
 }

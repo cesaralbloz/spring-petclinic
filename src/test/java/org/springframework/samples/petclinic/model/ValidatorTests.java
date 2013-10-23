@@ -33,11 +33,10 @@ public class ValidatorTests {
 
 		Validator validator = createValidator();
 		Set<ConstraintViolation<Person>> constraintViolations = validator.validate(person);
-
 		Assert.assertEquals(1, constraintViolations.size());
+
 		ConstraintViolation<Person> violation =  constraintViolations.iterator().next();
 		Assert.assertEquals(violation.getPropertyPath().toString(), "firstName");
 		Assert.assertEquals(violation.getMessage(), "may not be empty");
 	}
-
 }

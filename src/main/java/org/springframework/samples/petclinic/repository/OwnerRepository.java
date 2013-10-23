@@ -75,6 +75,4 @@ public interface OwnerRepository {
 	 * @see BaseEntity#isNew
 	 */
 	void save(Owner owner) throws DataAccessException;
-
-
 }
